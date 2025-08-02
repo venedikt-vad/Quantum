@@ -19,6 +19,8 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	virtual void OnConstruction(const FTransform& Transform) override;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -26,9 +28,10 @@ public:
 	// Tunnel mesh components
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Tunnel")
 	UStaticMeshComponent* TunnelMesh1;
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Tunnel")
 	UStaticMeshComponent* TunnelMesh2;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Tunnel")
+	UStaticMeshComponent* TunnelMesh3;
 
 	// Movement speed (editable in editor)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tunnel")
