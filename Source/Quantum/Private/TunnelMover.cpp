@@ -68,15 +68,21 @@ void ATunnelMover::Tick(float DeltaTime) {
 			TunnelMesh1->SetRelativeLocation(FVector(MaxX + MeshLength, 0.0f, 0.0f));
 			MaxX += MeshLength;  // Update max position
 			SpawnSectionObstacles(TunnelMesh1);
+			SetRandomMesh(TunnelMesh1);
+
 		}
 		if (X2 <= -MeshLength) {
 			TunnelMesh2->SetRelativeLocation(FVector(MaxX + MeshLength, 0.0f, 0.0f));
 			MaxX += MeshLength;  // Update max position
 			SpawnSectionObstacles(TunnelMesh2);
+			SetRandomMesh(TunnelMesh2);
+
 		}
 		if (X3 <= -MeshLength) {
 			TunnelMesh3->SetRelativeLocation(FVector(MaxX + MeshLength, 0.0f, 0.0f));
 			SpawnSectionObstacles(TunnelMesh3);
+			SetRandomMesh(TunnelMesh3);
+
 		}
 	}
 
@@ -89,6 +95,17 @@ void ATunnelMover::PositionTunnelMeshes() {
 		TunnelMesh1->SetRelativeLocation(FVector(0.0f, 0.0f, 0.0f));
 		TunnelMesh2->SetRelativeLocation(FVector(MeshLength, 0.0f, 0.0f));
 		TunnelMesh3->SetRelativeLocation(FVector(2 * MeshLength, 0.0f, 0.0f));
+		SetRandomMesh(TunnelMesh1);
+		SetRandomMesh(TunnelMesh2);
+		SetRandomMesh(TunnelMesh3);
+
+	}
+}
+
+void ATunnelMover::SetRandomMesh(UStaticMeshComponent* MeshComp) {
+	if (TunnelMeshesVariants.Num() > 0) {
+		int32 RandomIndex = FMath::RandRange(0, TunnelMeshesVariants.Num() - 1);
+		MeshComp->SetStaticMesh(TunnelMeshesVariants[RandomIndex]);
 	}
 }
 

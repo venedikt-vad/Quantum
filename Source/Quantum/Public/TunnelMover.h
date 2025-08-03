@@ -33,6 +33,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Tunnel")
 	UStaticMeshComponent* TunnelMesh3;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tunnel")
+	TArray<UStaticMesh*> TunnelMeshesVariants;
+
 	// Movement speed (editable in editor)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tunnel")
 	float Speed;
@@ -56,6 +59,7 @@ public:
 
 private:
 
+	void SetRandomMesh(UStaticMeshComponent* MeshComp);
 	void PositionTunnelMeshes();
 	void SpawnSectionObstacles(UStaticMeshComponent* ResetMesh);
 	void UpdateObstacles(float DeltaTime);
