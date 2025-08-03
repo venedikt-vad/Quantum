@@ -37,8 +37,29 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tunnel")
 	float Speed;
 
+	// Obstacle spawning parameters
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Obstacles")
+	TArray<TSubclassOf<AActor>> ObstacleClasses;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Obstacles")
+	int32 Difficulty = 1;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Obstacles")
+	float TunnelWidth = 500.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Obstacles")
+	float MinObstacleSpacing = 200.f;
+
 	// Length of each tunnel segment (editable in editor)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tunnel")
 	float MeshLength;
 
+private:
+
+	void PositionTunnelMeshes();
+	void SpawnSectionObstacles(UStaticMeshComponent* ResetMesh);
+	void UpdateObstacles(float DeltaTime);
+	void DestroyOffscreenObstacles();
+
+	TArray<AActor*> SpawnedObstacles;
 };
